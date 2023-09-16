@@ -36,9 +36,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          # Upload entire repository
-          path: | 
-            cidr.html
+          name: my-artifact
+          path: cidr.html
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
