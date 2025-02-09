@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]  # Trigger the workflow on pushes to 'main'
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1) Check out your repository code
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2) (Optional) If you have a build step, run it here
+      #    For example, if you have a Node.js build:
+      #
+      # - name: Set up Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+      #
+      # - name: Install dependencies
+      #   run: npm install
+      #
+      # - name: Build the site
+      #   run: npm run build
+      #
+      # If your site is just HTML/CSS, you can skip build steps altogether.
+
+      # 3) Deploy the (built) files to the gh-pages branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 'publish_dir' is where your final site files live.
+          # For a simple static site in the root, use '.' 
+          # or if you had a build folder, put it here (e.g. './dist' or './build').
+          publish_dir: '.'
+          publish_branch: 'gh-pages'
